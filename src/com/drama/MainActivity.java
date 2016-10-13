@@ -17,21 +17,24 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected Button theme;
 	protected Button march;
 	protected Button stop;
+	protected Button gameOver;
 	protected MediaPlayer mp;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(com.drama.R.layout.activity_main); 
+		setContentView(com.drama.R.layout.activity_main);
 		drama = (Button)findViewById(com.drama.R.id.drama);
 		rada = (Button)findViewById(com.drama.R.id.rada);
 		theme = (Button)findViewById(com.drama.R.id.theme);
 		march = (Button)findViewById(com.drama.R.id.imp_march);
 		stop = (Button)findViewById(com.drama.R.id.stop);
+		gameOver = (Button)findViewById(com.drama.R.id.gameover);
 		drama.setOnClickListener(this);
 		rada.setOnClickListener(this);
 		theme.setOnClickListener(this);
 		march.setOnClickListener(this);
+		gameOver.setOnClickListener(this);
 		stop.setOnClickListener(this);
 	}
 
@@ -39,23 +42,26 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 
 		try{
-			switch (v.getId()) 
+			switch (v.getId())
 			{
-			case com.drama.R.id.drama:
-				playDrama(drama.getContext());
-				break;
-			case com.drama.R.id.rada: 
-				playRada(rada.getContext());
-				break;
-			case com.drama.R.id.theme:
-				playTheme(theme.getContext());
-				break;
-			case com.drama.R.id.imp_march:
-				playMarch(theme.getContext());
-				break;
-			case com.drama.R.id.stop:
-				stopPlay(stop.getContext());
-				break;
+				case com.drama.R.id.drama:
+					playDrama(drama.getContext());
+					break;
+				case com.drama.R.id.rada:
+					playRada(rada.getContext());
+					break;
+				case com.drama.R.id.theme:
+					playTheme(theme.getContext());
+					break;
+				case com.drama.R.id.imp_march:
+					playMarch(theme.getContext());
+					break;
+				case com.drama.R.id.stop:
+					stopPlay(stop.getContext());
+					break;
+				case com.drama.R.id.gameover:
+					playGameOver(gameOver.getContext());
+					break;
 			}
 		}
 		catch (Exception e) {
@@ -77,10 +83,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId())
 		{
-		case com.drama.R.id.action_exit:
-			android.os.Process.killProcess(android.os.Process.myPid());
-			super.onDestroy();
-			break; 
+			case com.drama.R.id.action_exit:
+				android.os.Process.killProcess(android.os.Process.myPid());
+				super.onDestroy();
+				break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -94,11 +100,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public void playTheme(Context context){
-		playIfNotPlay(context, com.drama.R.raw.swtheme); 
+		playIfNotPlay(context, com.drama.R.raw.swtheme);
 	}
 
 	public void playMarch(Context context){
 		playIfNotPlay(context, com.drama.R.raw.impma);
+	}
+
+	public void playGameOver(Context context){
+		playIfNotPlay(context, R.raw.gameover);
 	}
 
 	public void stopPlay(Context context){
@@ -109,8 +119,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (mp != null && mp.isPlaying()){
 			return;
 		}
-		mp = MediaPlayer.create(context, musicID);  
-		mp.start(); 
+		mp = MediaPlayer.create(context, musicID);
+		mp.start();
 
 	}
 }

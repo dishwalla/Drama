@@ -8,5 +8,6 @@
     <string name="button4">Star Wars Imperial March</string>
     <string name="button5">Stop</string>
     <string name="action_exit">Exit</string>
+    <string name="button6">Game Over</string>
 
 </resources>
